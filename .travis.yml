@@ -1,0 +1,34 @@
+sudo: required
+language: node_js
+node_js:
+  - "stable"
+services:
+  - docker
+cache:
+  directories:
+  - node_modules
+env:
+  DOCKER_COMPOSE_VERSION: 1.23.2
+
+before_install:
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
+install:
+  - npm install
+
+before_script:
+  - docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+  #- docker-compose exec app npm run migrate up
+
+script:
+  - npm test
+  - npm run test_client
+
+
+deploy:
+  provider: heroku
+  api_key: "8cbccf18-5d49-4cc0-ad65-5b4860110937"
+  app: hello-ci2

@@ -1,0 +1,8 @@
+# docker-compose.yml
+version: "3"
+services:
+  app:
+    environment:
+      DATABASE_URL: postgres://aplyanvwwvgqaz:f7d921660705501d6008db73a5987477956116558a3740aebf3f303abc614766@ec2-52-202-185-87.compute-1.amazonaws.com:5432/d9jvh7d74dab3g?ssl=true
+      NODE_ENV: production
+  
