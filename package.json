@@ -30,7 +30,7 @@
     "client": "npm start --prefix client",
     "test_client": "npm test --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "npm install --prefix client && npm run build --prefix client"
   },
   "devDependencies": {
     "enzyme": "^3.11.0",
